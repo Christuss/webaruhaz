@@ -1,12 +1,14 @@
 import { ADATOK } from "./adatok.js";
 
+const MTBODY = $("#maintableb");
+
 $(function () {
     main();
 })
 
 function main() {
-    const MTBODY = $("#maintableb");
     MTBODY.eq(0).html(tablaToltes());
+    $("#kor").click(korrendezes());
 }
 
 function tablaToltes() {
@@ -17,3 +19,14 @@ function tablaToltes() {
     return szoveg;
 }
 
+function korrendezes(){
+    let korrendezes = false;
+    if (!korrendezes) {
+        ADATOK.sort(function(a, b){return a-b});
+        korrendezes = true;
+        MTBODY.eq(0).html(tablaToltes());
+    } else {
+        ADATOK.sort(function(a, b){return b-a});
+        korrendezes = false;
+    } 
+}
