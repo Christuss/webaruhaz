@@ -1,9 +1,7 @@
 import { ADATOK } from "./adatok.js";
 
 const MTBODY = $("#maintableb");
-let szamrendezett = false;
-let nevrendzett = false;
-
+let lastsorted = "";
 
 $(function () {
     main();
@@ -11,62 +9,47 @@ $(function () {
 
 function main() {
     MTBODY.eq(0).html(tablaToltes());
-    let nev = $("#nev");
-    let kor = $("#kor");
-    let faj = $("#faj");
+    let fejlecelem = $("thead th");
 
-    nev.on("click", function(){
-        rendezes("n")
+    fejlecelem.on("click", function(){
+        rendezes($(event.target).attr("id"))
     });
 
-    kor.on("click", function(){
-        rendezes("k")
+    let deleteelem = $(".delete");
+    deleteelem.on("click", function(){
+        deleteline($(event.target).attr("id"));
     });
 
-    faj.on("click", function(){
-        rendezes("f")
-    });
 }
 
 function tablaToltes() {
     let szoveg = "";
     for (let index = 0; index < ADATOK.length; index++) {
-        szoveg += `<tr><td>${ADATOK[index].nev}</td><td>${ADATOK[index].kor}</td><td>${ADATOK[index].fajta}</td><td>❌</td></tr>`;
+        szoveg += `<tr><td>${ADATOK[index].nev}</td><td>${ADATOK[index].kor}</td><td>${ADATOK[index].fajta}</td><td id="t${index}" class="delete">❌</td></tr>`;
     }
     return szoveg;
 }
 
-function korrendezes(){
-    if (!szamrendezett) {
-        ADATOK.sort(function(a, b){return a.kor - b.kor});
-        szamrendezett = true;
-        MTBODY.eq(0).html(tablaToltes());
-    } else {
+function rendezes(id){
+    if (id === lastsorted) {
         ADATOK.reverse();
-        szamrendezett = false;
+        MTBODY.eq(0).html(tablaToltes());      
+    } else {
+        ADATOK.sort(function(a, b){
+            if (a[id] < b[id]) {
+                return -1;
+            }else if(a[id] > b[id]){
+                return 1;
+            }
+            return 0;
+        });
         MTBODY.eq(0).html(tablaToltes());
+        lastsorted = id;
     }
 }
 
-function nevrendzes(){
-    if (!nevrendzett) {
-        ADATOK.sort(function(a, b){return a.nev - b.nev});
-        szamrendezett = true;
-        MTBODY.eq(0).html(tablaToltes());
-    } else {
-        ADATOK.reverse();
-        szamrendezett = false;
-        MTBODY.eq(0).html(tablaToltes());
-    }
-}
-
-function rendezes(rendezendo){
-    if (rendezendo === "n") {
-        ADATOK.sort(function(a, b){return a.nev < b.nev});
-        nevrendzet
-    } else if(rendezendo === "k"){
-        
-    }else{
-
-    }
+function deleteline(id){
+    id = parseInt(id.substring(1));
+    ADATOK.splice(id, 1);
+    main()
 }

@@ -3,3 +3,7 @@ thead{
     color: aliceblue;
     cursor: pointer;
 }
+
+.delete{
+    cursor: pointer;
+}
