@@ -37,7 +37,7 @@ function startUp() {
 function kartyakDivbe() {
     let szoveg = "";
     for (let index = 0; index < ADATOK.length; index++) {
-        szoveg += '<div class="card col-md-3"><div class="card-body"><h2 class="card-title">' + ADATOK[index].nev + '</h2><p><b>Kor:</b> ' + ADATOK[index].kor + '<br><b>Fajta: </b>' + ADATOK[index].fajta + '</p><button id= "' + index + '" type="button" class="btn btn-primary mod" data-bs-toggle="modal" data-bs-target="#myModal">Mutat</button></div></div>';
+        szoveg += '<div class="card col-md-3"><div class="card-body"><h2 class="card-title">' + ADATOK[index].nev + '</h2><p><b>Kor:</b> ' + ADATOK[index].kor + '<br><b>Fajta: </b>' + ADATOK[index].fajta + '</p><button id= "' + index + '" type="button" class="btn btn-primary mod" data-bs-toggle="modal" data-bs-target="#myModal">Mutat</button><button type="button" class="kosarGomb btn btn-primary ms-5" id"' + index + '">Kosárba</button></div></div>';
     }
     return szoveg;
 }
