@@ -1,5 +1,7 @@
 import { ADATOK } from "./adatok.js";
 
+let modalIndex = 0;
+
 $(function () {
     startUp();
 })
@@ -12,7 +14,24 @@ function startUp() {
     console.log(GOMB);
     GOMB.on("click",function () {
         MODAL.html(modalfeltolt(this.id));
+        modalIndex = this.id;
     })
+    const BAL = $('#bal');
+    BAL.on('click', function () {
+       modalIndex--;
+       if (modalIndex < 0) {
+        modalIndex = ADATOK.length-1;
+       }
+       MODAL.html(modalfeltolt(modalIndex)); 
+    });
+    const JOBB = $("#jobb");
+    JOBB.on('click', function () {
+        modalIndex++;
+        if (modalIndex > ADATOK.length - 1) {
+         modalIndex = 0;
+        }
+        MODAL.html(modalfeltolt(modalIndex)); 
+     });
 }
 
 function kartyakDivbe() {
