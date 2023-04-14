@@ -2,6 +2,7 @@ import { ADATOK } from "./adatok.js";
 
 const MTBODY = $("#maintableb");
 let lastsorted = "";
+let kereses = "";
 
 $(function () {
     main();
@@ -18,6 +19,11 @@ function main() {
     let deleteelem = $(".delete");
     deleteelem.on("click", function(){
         deleteline($(event.target).attr("id"));
+    });
+
+    let keresok = $("form input");
+    keresok.on("input", function(){
+        kereso(event.data);
     });
 
 }
@@ -52,4 +58,12 @@ function deleteline(id){
     id = parseInt(id.substring(1));
     ADATOK.splice(id, 1);
     main()
+}
+
+function kereso(keresettszoveg){ /* kulcsot is adjunk at */
+    kereses += keresettszoveg;
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        
+    }
 }
