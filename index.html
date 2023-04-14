@@ -23,6 +23,7 @@
                 <a class="navbar-brand" href="#">Webáruház</a>
                 <a href="index.html" class="nav-link" id="admin">Kutyák adatainak megtekintése</a>
                 <a href="admin.html" class="nav-link" id="admin">Admin</a>
+                <button type="button" class="btn btn-primary mod" data-bs-toggle="modal" data-bs-target="#kosarModal">Kosár</button>
             </div>
         </nav>
     </header>
@@ -30,7 +31,6 @@
         <div class="row">
 
         </div>
-
     </main>
 
     <div class="modal" id="myModal">
@@ -43,8 +43,30 @@
                 <div class="modal-body" id="modbod">
                     Üres
                 </div>
-                <div class="modal-footer"><button type="button" class="btn btn-primary" id="bal">bal</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="bal">bal</button>
                     <button type="button" class="btn btn-primary" id="jobb">jobb</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="kosarModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modbod">
+                    <div id="kosarTartalma">
+                        A kosár üres
+                    </div>
+                    <div id="vegosszeg">
+                        Végösszeg:
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="fizetes">Fizetés</button>
                 </div>
             </div>
         </div>
