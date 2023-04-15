@@ -101,12 +101,15 @@ function nyitvatext(){
 
 function adathozzaadas(){
     let inputok = $("#elemhozzaad input");
+    
     let ujelem = {
         id: ADATOK[ADATOK.length-1]["id"]+1,
         nev: inputok.eq(0).val(),
         kor: parseInt(inputok.eq(1).val()),
         fajta: inputok.eq(2).val()
+
     }
     ADATOK.push(ujelem);
-    tablaToltes(ADATOK);
+    console.log(ADATOK);
+    MTBODY.eq(0).html(tablaToltes(ADATOK));
 }
