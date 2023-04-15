@@ -41,10 +41,13 @@ function main() {
   });
 
   const KOSARGOMB = $(".kosargomb");
+  const KOSARSZAM = $("#kosarSzam");
+  KOSARSZAM.html(KOSARTOMB.length);
 
     KOSARGOMB.on("click", function () {
       kosarIndex = this.id;
       KOSARTOMB.push(kosarIndex[0]);
+      KOSARSZAM.html(KOSARTOMB.length);
     });
   
     const KOSARNAV = $("#kosarNav");
@@ -63,6 +66,7 @@ function main() {
         KOSARTARTALMA.html("Köszönjük a vásárlást!");
         VEGOSSZEGHELYE.html("");
         KOSARTOMB.length = 0; 
+        KOSARSZAM.html(KOSARTOMB.length);
       }
     });
 }
