@@ -8,6 +8,8 @@ let nevfeltetel;
 let korfeltetel;
 let fajfeltetel;
 
+let ujnyitva = false;
+
 $(function () {
     main();
 })
@@ -29,6 +31,16 @@ function main() {
     keresok.on("input" ,function(){
         kereso(event.target.value, $(event.target).attr("id"));
     })
+
+    let ujelem = $("#ujelem");
+    ujelem.on("click", function(){
+       nyitvatext();
+    });
+
+    let hozzaad = $("#elemhozzaad button");
+    hozzaad.on("click", function(){
+       adathozzaadas();
+    });
 
 }
 
@@ -68,8 +80,6 @@ function deleteline(id){
 
 function kereso(keresettszoveg, id){ /* kulcsot is adjunk at */
     id = id.slice(0,-5);
-    console.log(id);
-    console.log(keresettszoveg);
     let talalatlista = [];
     for (let index = 0; index < ADATOK.length; index++) {
         if (String(ADATOK[index][id]).toLowerCase().includes(keresettszoveg)) {
@@ -77,4 +87,26 @@ function kereso(keresettszoveg, id){ /* kulcsot is adjunk at */
         }
     }
     MTBODY.eq(0).html(tablaToltes(talalatlista));
+}
+
+function nyitvatext(){
+    if (ujnyitva) {
+        ujnyitva = false;
+        $("#ujelem").eq(0).html("Új elem");
+    } else {
+        ujnyitva = true;
+        $("#ujelem").eq(0).html("Bezár");
+    }
+}
+
+function adathozzaadas(){
+    let inputok = $("#elemhozzaad input");
+    let ujelem = {
+        id: ADATOK[ADATOK.length-1]["id"]+1,
+        nev: inputok.eq(0).val(),
+        kor: parseInt(inputok.eq(1).val()),
+        fajta: inputok.eq(2).val()
+    }
+    ADATOK.push(ujelem);
+    tablaToltes(ADATOK);
 }
