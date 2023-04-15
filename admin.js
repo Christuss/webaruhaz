@@ -4,12 +4,16 @@ const MTBODY = $("#maintableb");
 let lastsorted = "";
 let kereses = "";
 
+let nevfeltetel;
+let korfeltetel;
+let fajfeltetel;
+
 $(function () {
     main();
 })
 
 function main() {
-    MTBODY.eq(0).html(tablaToltes());
+    MTBODY.eq(0).html(tablaToltes(ADATOK));
     let fejlecelem = $("thead th");
 
     fejlecelem.on("click", function(){
@@ -22,19 +26,21 @@ function main() {
     });
 
     let keresok = $("form input");
-    keresok.on("input", function(){
-        kereso(event.data);
-    });
+    keresok.on("input" ,function(){
+        kereso(event.target.value, $(event.target).attr("id"));
+    })
 
 }
 
-function tablaToltes() {
+function tablaToltes(lista) {
     let szoveg = "";
-    for (let index = 0; index < ADATOK.length; index++) {
-        szoveg += `<tr><td>${ADATOK[index].nev}</td><td>${ADATOK[index].kor}</td><td>${ADATOK[index].fajta}</td><td id="t${index}" class="delete">❌</td></tr>`;
+    for (let index = 0; index < lista.length; index++) {
+        szoveg += `<tr><td>${lista[index].nev}</td><td>${lista[index].kor}</td><td>${lista[index].fajta}</td><td id="t${index}" class="delete">❌</td></tr>`;
     }
     return szoveg;
 }
+
+
 
 function rendezes(id){
     if (id === lastsorted) {
@@ -57,13 +63,18 @@ function rendezes(id){
 function deleteline(id){
     id = parseInt(id.substring(1));
     ADATOK.splice(id, 1);
-    main()
+    main();
 }
 
-function kereso(keresettszoveg){ /* kulcsot is adjunk at */
-    kereses += keresettszoveg;
-    for (let index = 0; index < array.length; index++) {
-        const element = array[index];
-        
+function kereso(keresettszoveg, id){ /* kulcsot is adjunk at */
+    id = id.slice(0,-5);
+    console.log(id);
+    console.log(keresettszoveg);
+    let talalatlista = [];
+    for (let index = 0; index < ADATOK.length; index++) {
+        if (String(ADATOK[index][id]).toLowerCase().includes(keresettszoveg)) {
+            talalatlista.push(ADATOK[index]);
+        }
     }
+    MTBODY.eq(0).html(tablaToltes(talalatlista));
 }
