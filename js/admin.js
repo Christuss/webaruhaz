@@ -25,6 +25,7 @@ function main() {
     let keresok = $("form input");
     keresok.on("input" ,function(){
         kereso(event.target.value, $(event.target).attr("id"));
+        torlesGomb();
     })
 
     let ujelem = $("#ujelem");
@@ -118,11 +119,16 @@ function adathozzaadas(){
     ADATOK.push(ujelem);
     console.log(ADATOK);
     MTBODY.eq(0).html(tablaToltes(ADATOK));
+
+    let hozzaad = $("#elemhozzaad button");
+    hozzaad.prop("disabled", true);
+
+    setTimeout(function(){
+        hozzaad.prop("disabled", false);
+    }, 1000);
 }
 
 function inputCheck(inputok){
     const szovegcheck = /^[a-zA-Z]+$/;
-    const szamcheck = /^(?:100|[1-9][0-9]?|0)$/;
-
-    
+    const szamcheck = /^(?:100|[1-9][0-9]?|0)$/;   
 }
