@@ -22,11 +22,6 @@ function main() {
         rendezes($(event.target).attr("id"))
     });
 
-    let deleteelem = $(".delete");
-    deleteelem.on("click", function(){
-        deleteline($(event.target).attr("id"));
-    });
-
     let keresok = $("form input");
     keresok.on("input" ,function(){
         kereso(event.target.value, $(event.target).attr("id"));
@@ -40,7 +35,10 @@ function main() {
     let hozzaad = $("#elemhozzaad button");
     hozzaad.on("click", function(){
        adathozzaadas();
+       torlesGomb();
     });
+
+    torlesGomb();
 
 }
 
@@ -57,7 +55,7 @@ function tablaToltes(lista) {
 function rendezes(id){
     if (id === lastsorted) {
         ADATOK.reverse();
-        MTBODY.eq(0).html(tablaToltes());      
+        MTBODY.eq(0).html(tablaToltes(ADATOK));      
     } else {
         ADATOK.sort(function(a, b){
             if (a[id] < b[id]) {
@@ -67,14 +65,22 @@ function rendezes(id){
             }
             return 0;
         });
-        MTBODY.eq(0).html(tablaToltes());
+        MTBODY.eq(0).html(tablaToltes(ADATOK));
         lastsorted = id;
     }
+}
+
+function torlesGomb() {
+    let deleteelem = $(".delete");
+    deleteelem.on("click", function(){
+        deleteline($(event.target).attr("id"));
+    });
 }
 
 function deleteline(id){
     id = parseInt(id.substring(1));
     ADATOK.splice(id, 1);
+    console.log("delete");
     main();
 }
 
@@ -101,7 +107,7 @@ function nyitvatext(){
 
 function adathozzaadas(){
     let inputok = $("#elemhozzaad input");
-    
+    console.log("adath");
     let ujelem = {
         id: ADATOK[ADATOK.length-1]["id"]+1,
         nev: inputok.eq(0).val(),
@@ -112,4 +118,11 @@ function adathozzaadas(){
     ADATOK.push(ujelem);
     console.log(ADATOK);
     MTBODY.eq(0).html(tablaToltes(ADATOK));
+}
+
+function inputCheck(inputok){
+    const szovegcheck = /^[a-zA-Z]+$/;
+    const szamcheck = /^(?:100|[1-9][0-9]?|0)$/;
+
+    
 }
