@@ -75,7 +75,7 @@ function kartyakDivbe() {
   let szoveg = "";
   for (let index = 0; index < ADATOK.length; index++) {
     szoveg +=
-      '<div class="card col-md-3"><div class="card-body"><h2 class="card-title">' +
+      '<div class="card col-lg-4 col-md-5 col-sm-6"><div class="card-body"><h2 class="card-title">' +
       ADATOK[index].nev +
       "</h2><p><b>Kor:</b> " +
       ADATOK[index].kor +
